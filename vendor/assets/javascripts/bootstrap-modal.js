@@ -8,7 +8,7 @@ var BootstrapModal = function BootstrapModal(opts){
   this.defaults = {
     element: 'modal-window',
     header: {
-      style: null,
+      class: null,
       closeButton: {
         text: null,
         icon: 'icon-remove'
@@ -18,11 +18,11 @@ var BootstrapModal = function BootstrapModal(opts){
     },
     body: {
       content: 'Hello',
-      style: null
+      class: null
     },
     footer: {
       content: 'Hello',
-      style: null
+      class: null
     }
   };
 
@@ -53,8 +53,6 @@ var BootstrapModal = function BootstrapModal(opts){
     };
   })(this);
 
-  this.element = $('body #' + this.setting('element'));
-
   this.section = (function(self){
     return function(section) {
       var s = self.element.find('.modal-' + section);
@@ -63,16 +61,15 @@ var BootstrapModal = function BootstrapModal(opts){
       if(s.size() == 0){
 
         if(settings){
-          s = $("<div>", {class: 'modal-' + section + ' '+ settings.style, id: self.defaults.element + 'modal-' + section});
+          s = $("<div>", {class: 'modal-' + section + ' '+ settings.class, id: self.defaults.element + 'modal-' + section});
 
           if(settings.closeButton){
-            var closeButtonContent = $('<i>', {class: 'icon-remove'});
+            var closeButtonContent = $('<i/>', {class: 'close'})
+            var icon               = (settings.closeButton.icon || 'remove').match(/^(?:icon-)?(\w+)/)[1];
+            closeButtonContent.addClass('icon-' + icon)
 
             if(settings.closeButton.text)
-              closeButtonContent = settigs.closeButton.text;
-
-            if(settings.closeButton.icon)
-              closeButtonContent.removeClass().addClass(settings.closeButton.icon);
+              closeButtonContent.append(settings.closeButton.text);
 
             s.append(
               $('<button>', {class: "close", 'data-dismiss': "modal", 'aria-hidden': "true"})
@@ -119,17 +116,11 @@ var BootstrapModal = function BootstrapModal(opts){
 
   })(this);
 
-  this.show = function(){
-    this.panel.modal('show');
-  };
+  this.show = function(){ this.panel.modal('show'); };
 
-  this.hide = function(){
-    this.panel.modal('hide');
-  };
+  this.hide = function(){ this.panel.modal('hide'); };
 
-  this.toggle = function(){
-    this.panel.modal('toggle');
-  };
+  this.toggle = function(){ this.panel.modal('toggle'); };
 
   return {
        panel: this.panel,
