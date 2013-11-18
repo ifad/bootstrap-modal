@@ -42,18 +42,6 @@ var BootstrapModal = function BootstrapModal(opts){
 
   this.settings = $.extend(this.defaults, opts, this.data('settings'));
 
-  this.setting = (function(self){
-    return function(what){
-      var setting = self.settings;
-
-      $.each(what.split('.'), function(i,n){
-        setting = (setting[n] = (setting[n] || {}))
-      });
-
-      setting
-    };
-  })(this);
-
   this.section = (function(self){
     return function(section) {
       var s = $('.modal-' + section, self.element);
