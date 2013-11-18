@@ -7,6 +7,7 @@
 var BootstrapModal = function BootstrapModal(opts){
   this.defaults = {
     element: 'modal-window',
+    data: {},
     header: {
       class: null,
       closeButton: {
@@ -55,40 +56,38 @@ var BootstrapModal = function BootstrapModal(opts){
 
   this.section = (function(self){
     return function(section) {
-      var s = self.element.find('.modal-' + section);
+      var s = $('.modal-' + section, self.element);
       var settings = self.settings[section];
 
-      if(s.size() == 0){
 
-        if(settings){
-          s = $("<div>", {class: 'modal-' + section + ' '+ settings.class, id: self.defaults.element + 'modal-' + section});
+    if(settings){
+      s = $("<div>", {class: 'modal-' + section + ' '+ settings.class, id: self.defaults.element + 'modal-' + section});
 
-          if(settings.closeButton){
-            var closeButtonContent = $('<i/>', {class: 'close'})
-            var icon               = (settings.closeButton.icon || 'remove').match(/^(?:icon-)?(\w+)/)[1];
-            closeButtonContent.addClass('icon-' + icon)
+      if(settings.closeButton){
+        var closeButtonContent = $('<i/>', {class: 'close'})
+        var icon               = (settings.closeButton.icon || 'remove').match(/^(?:icon-)?(\w+)/)[1];
+        closeButtonContent.addClass('icon-' + icon)
 
-            if(settings.closeButton.text)
-              closeButtonContent.append(settings.closeButton.text);
+        if(settings.closeButton.text)
+          closeButtonContent.append(settings.closeButton.text);
 
-            s.append(
-              $('<button>', {class: "close", 'data-dismiss': "modal", 'aria-hidden': "true"})
-                .append(closeButtonContent)
-            );
-          }
-
-          if(settings.title){
-            s.append(
-              $('<h3>', {id: self.defaults.element + 'modal-' + section + '-title'})
-                .append(settings.title)
-            );
-          }
-
-          if(settings.content)
-            s.append(settings.content);
-
-        }
+        s.append(
+          $('<button>', {class: "close", 'data-dismiss': "modal", 'aria-hidden': "true"})
+            .append(closeButtonContent)
+        );
       }
+
+      if(settings.title){
+        s.append(
+          $('<h3>', {id: self.defaults.element + 'modal-' + section + '-title'})
+            .append(settings.title)
+        );
+      }
+
+      if(settings.content)
+        s.append(settings.content);
+
+    }
 
       return s;
     }
@@ -108,6 +107,11 @@ var BootstrapModal = function BootstrapModal(opts){
     var id = self.settings.element;
 
     w = $('<div>', {id: id, class: "modal hide fade", tabindex: "-1", role: "dialog",  'aria-labelledby': id+'Label', 'aria-hidden': "true"});
+
+    $.each(self.settings.data, function(k,v){
+      w.attr('data-'+k, v);
+    });
+
     w.append(self.header).append(self.body).append(self.footer);
 
     $('body').append(w);
