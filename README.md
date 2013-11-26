@@ -16,7 +16,7 @@ Then execute:
 
 And then require the Javascript from your `application.js`:
 
-    //= require bootstrap-modal
+    //= require bootstrapmodal
 
 ## Usage
 
