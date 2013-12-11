@@ -49,7 +49,7 @@ var BootstrapModal = function BootstrapModal(opts){
 
 
     if(settings){
-      s = $("<div>", {'class': 'modal-' + section + ' '+ settings.class, id: self.defaults.element + 'modal-' + section});
+      s = $("<div>", {'class': 'modal-' + section + ' '+ settings['class'], id: self.defaults.element + 'modal-' + section});
 
       if(settings.closeButton){
         var closeButtonContent = $('<i/>', {'class': 'close'})
