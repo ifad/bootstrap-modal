@@ -9,7 +9,7 @@ var BootstrapModal = function BootstrapModal(opts){
     element: 'modal-window',
     data: {},
     header: {
-      class: null,
+      'class': null,
       closeButton: {
         text: null,
         icon: 'icon-remove'
@@ -19,11 +19,11 @@ var BootstrapModal = function BootstrapModal(opts){
     },
     body: {
       content: 'Hello',
-      class: null
+      'class': null
     },
     footer: {
       content: 'Hello',
-      class: null
+      'class': null
     }
   };
 
@@ -49,10 +49,10 @@ var BootstrapModal = function BootstrapModal(opts){
 
 
     if(settings){
-      s = $("<div>", {class: 'modal-' + section + ' '+ settings.class, id: self.defaults.element + 'modal-' + section});
+      s = $("<div>", {'class': 'modal-' + section + ' '+ settings.class, id: self.defaults.element + 'modal-' + section});
 
       if(settings.closeButton){
-        var closeButtonContent = $('<i/>', {class: 'close'})
+        var closeButtonContent = $('<i/>', {'class': 'close'})
         var icon               = (settings.closeButton.icon || 'remove').match(/^(?:icon-)?(\w+)/)[1];
         closeButtonContent.addClass('icon-' + icon)
 
@@ -60,7 +60,7 @@ var BootstrapModal = function BootstrapModal(opts){
           closeButtonContent.append(settings.closeButton.text);
 
         s.append(
-          $('<button>', {class: "close", 'data-dismiss': "modal", 'aria-hidden': "true"})
+          $('<button>', {'class': "close", 'data-dismiss': "modal", 'aria-hidden': "true"})
             .append(closeButtonContent)
         );
       }
@@ -94,7 +94,7 @@ var BootstrapModal = function BootstrapModal(opts){
     var w  = self.element;
     var id = self.settings.element;
 
-    w = $('<div>', {id: id, class: "modal hide fade", tabindex: "-1", role: "dialog",  'aria-labelledby': id+'Label', 'aria-hidden': "true"});
+    w = $('<div>', {id: id, 'class': "modal hide fade", tabindex: "-1", role: "dialog",  'aria-labelledby': id+'Label', 'aria-hidden': "true"});
 
     $.each(self.settings.data, function(k,v){
       w.attr('data-'+k, v);
