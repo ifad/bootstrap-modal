@@ -52,8 +52,7 @@ From JavaScript:
 
 ## Background
 
-Spinned off a corporate [IFAD](http://github.com/ifad/) application in which
-an user did too much damage because the confirm wasn't *THAT* explicit ... ;-).
+Built after [data-confirm-modal](https://github.com/ifad/data-confirm-modal) - check it out.
 
 ## Contributing
 
